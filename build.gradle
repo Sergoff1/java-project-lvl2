@@ -20,6 +20,8 @@ repositories {
 dependencies {
     implementation 'info.picocli:picocli:4.6.1'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 application {
@@ -29,3 +31,8 @@ application {
 compileJava {
     options.release = 15
 }
+
+test {
+    useJUnitPlatform()
+}
+
