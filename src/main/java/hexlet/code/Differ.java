@@ -17,8 +17,8 @@ public class Differ {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Map<String, Object> map1 = objectMapper.readValue(file1, new TypeReference<>() {});
-        Map<String, Object> map2 = objectMapper.readValue(file2, new TypeReference<>() {});
+        Map<String, Object> map1 = objectMapper.readValue(file1, new TypeReference<>() { });
+        Map<String, Object> map2 = objectMapper.readValue(file2, new TypeReference<>() { });
 
         Set<String> keys =  new TreeSet<>(map1.keySet());
         keys.addAll(map2.keySet());
@@ -28,7 +28,7 @@ public class Differ {
                 diff += "  + " + key + ": " + map2.get(key) + "\n";
             } else if (map2.get(key) == null) {
                 diff += "  - " + key + ": " + map1.get(key) + "\n";
-            } else if(map1.get(key).equals(map2.get(key))) {
+            } else if (map1.get(key).equals(map2.get(key))) {
                 diff += "    " + key + ": " + map1.get(key) + "\n";
             } else {
                 diff += "  - " + key + ": " + map1.get(key) + "\n";
