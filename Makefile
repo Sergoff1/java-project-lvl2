@@ -10,6 +10,9 @@ check-updates:
 lint:
 	./gradlew checkstyleMain checkstyleTest
 
+test:
+	./gradlew test
+
 build:
 	./gradlew clean build
 
