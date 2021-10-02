@@ -13,7 +13,7 @@ public class App implements Runnable {
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
             defaultValue = "stylish", description = "output format [default: ${DEFAULT-VALUE}]")
-    private String format = "stylish";
+    private final String format = "stylish";
 
     @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
     private String filePath1;
@@ -28,7 +28,7 @@ public class App implements Runnable {
             Map<String, Object> parsedFile1 = Parser.parse(filePath1);
             Map<String, Object> parsedFile2 = Parser.parse(filePath2);
 
-            System.out.println(Differ.generate(parsedFile1, parsedFile2));
+            System.out.println(Differ.generate(parsedFile1, parsedFile2, format));
         } catch (Exception e) {
             e.printStackTrace();
         }
