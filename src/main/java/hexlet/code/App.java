@@ -13,7 +13,7 @@ public class App implements Runnable {
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
             defaultValue = "stylish", description = "output format [default: ${DEFAULT-VALUE}]")
-    private final String format = "stylish";
+    private String format = "stylish";
 
     @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
     private String filePath1;

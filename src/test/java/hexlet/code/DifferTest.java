@@ -8,7 +8,7 @@ import java.util.Map;
 class DifferTest {
 
     @Test
-    void testGenerate() throws Exception {
+    void testGenerateStylish() throws Exception {
         String expected = """
                 {
                     chars1: [a, b, c]
@@ -71,5 +71,41 @@ class DifferTest {
         Assertions.assertEquals(expected, Differ.generate(parsedFile1, Map.of(), "stylish"));
 
         Assertions.assertEquals("", Differ.generate(Map.of(), Map.of(), "stylish"));
+    }
+
+    @Test
+    void testGeneratePlain() throws Exception {
+        String expected = """
+                Property 'chars2' was updated. From [complex value] to false
+                Property 'checked' was updated. From false to true
+                Property 'default' was updated. From null to [complex value]
+                Property 'id' was updated. From 45 to null
+                Property 'key1' was removed
+                Property 'key2' was added with value: 'value2'
+                Property 'numbers2' was updated. From [complex value] to [complex value]
+                Property 'numbers3' was removed
+                Property 'numbers4' was added with value: [complex value]
+                Property 'obj1' was added with value: [complex value]
+                Property 'setting1' was updated. From 'Some value' to 'Another value'
+                Property 'setting2' was updated. From 200 to 300
+                Property 'setting3' was updated. From true to 'none'""";
+
+        String filePath1 = "src/test/resources/file1.json";
+        String filePath2 = "src/test/resources/file2.json";
+
+        Map<String, Object> parsedFile1 = Parser.parse(filePath1);
+        Map<String, Object> parsedFile2 = Parser.parse(filePath2);
+
+        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "plain"));
+
+        filePath1 = "src/test/resources/file1.yml";
+        filePath2 = "src/test/resources/file2.yml";
+
+        parsedFile1 = Parser.parse(filePath1);
+        parsedFile2 = Parser.parse(filePath2);
+
+        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "plain"));
+
+        Assertions.assertEquals("", Differ.generate(Map.of(), Map.of(), "plain"));
     }
 }
