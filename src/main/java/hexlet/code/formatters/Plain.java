@@ -1,6 +1,6 @@
 package hexlet.code.formatters;
 
-import javax.lang.model.type.PrimitiveType;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Plain {
@@ -15,13 +15,13 @@ public class Plain {
 
             if (diffValues[0] instanceof String) {
                 diffValues[0] = "'" + diffValues[0] + "'";
-            } else if (diffValues[1] instanceof Object) {
+            } else if (isComplex(diffValues[0])) {
                 diffValues[0] = "[complex value]";
             }
 
             if (diffValues[1] instanceof String) {
                 diffValues[1] = "'" + diffValues[1] + "'";
-            } else if (!(diffValues[1] instanceof PrimitiveType)) {
+            } else if (isComplex(diffValues[1])) {
                 diffValues[1] = "[complex value]";
             }
 
@@ -29,12 +29,19 @@ public class Plain {
             if ("'_!add'".equals(diffValues[0])) {
                 formattedDiff += "added with value: " + diffValues[1] + "\n";
             } else if ("'_!delete'".equals(diffValues[0])) {
-                formattedDiff += "was removed\n";
+                formattedDiff += "removed\n";
             } else {
                 formattedDiff += "updated. From " + diffValues[0] + " to " + diffValues[1] + "\n";
             }
         }
 
-        return formattedDiff;
+        return formattedDiff.substring(0, formattedDiff.length() - 1);
+    }
+
+    private static boolean isComplex(Object obj) {
+        return obj != null
+                && (obj.getClass().isArray()
+                || Map.class.isAssignableFrom(obj.getClass())
+                || ArrayList.class.isAssignableFrom(obj.getClass()));
     }
 }
