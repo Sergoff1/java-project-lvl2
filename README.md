@@ -4,5 +4,5 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0d8571a28990c28c774a/test_coverage)](https://codeclimate.com/github/Sergoff1/java-project-lvl2/test_coverage)
 ![My CI](https://github.com/Sergoff1/java-project-lvl2/workflows/My%20CI/badge.svg)
 
-### Сравнение JSON и YAML файлов в формате stylish
-[![asciicast](https://asciinema.org/a/ADm3bhXVai2gVC1FppqHzPGHI.svg)](https://asciinema.org/a/ADm3bhXVai2gVC1FppqHzPGHI)
+### Сравнение JSON и YAML файлов в форматах stylish, plain и json
+[![asciicast](https://asciinema.org/a/GMeCRIICHIOw4nNElOyoLSsLp.svg)](https://asciinema.org/a/GMeCRIICHIOw4nNElOyoLSsLp)
