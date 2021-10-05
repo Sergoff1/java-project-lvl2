@@ -42,7 +42,7 @@ class DifferTest {
         filePath1 = "src/test/resources/file1.yml";
         filePath2 = "src/test/resources/file2.yml";
 
-        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2, "stylish"));
+        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2));
     }
 
     @Test
