@@ -3,8 +3,6 @@ package hexlet.code;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
 class DifferTest {
 
     @Test
@@ -39,38 +37,12 @@ class DifferTest {
         String filePath1 = "src/test/resources/file1.json";
         String filePath2 = "src/test/resources/file2.json";
 
-        Map<String, Object> parsedFile1 = Parser.parse(filePath1);
-        Map<String, Object> parsedFile2 = Parser.parse(filePath2);
-
-        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "stylish"));
+        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2, "stylish"));
 
         filePath1 = "src/test/resources/file1.yml";
         filePath2 = "src/test/resources/file2.yml";
 
-        parsedFile1 = Parser.parse(filePath1);
-        parsedFile2 = Parser.parse(filePath2);
-
-        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "stylish"));
-
-        expected = """
-                {
-                  - chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  - checked: false
-                  - default: null
-                  - id: 45
-                  - key1: value1
-                  - numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  - numbers3: [3, 4, 5]
-                  - setting1: Some value
-                  - setting2: 200
-                  - setting3: true
-                }""";
-
-        Assertions.assertEquals(expected, Differ.generate(parsedFile1, Map.of(), "stylish"));
-
-        Assertions.assertEquals("", Differ.generate(Map.of(), Map.of(), "stylish"));
+        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2, "stylish"));
     }
 
     @Test
@@ -93,20 +65,12 @@ class DifferTest {
         String filePath1 = "src/test/resources/file1.json";
         String filePath2 = "src/test/resources/file2.json";
 
-        Map<String, Object> parsedFile1 = Parser.parse(filePath1);
-        Map<String, Object> parsedFile2 = Parser.parse(filePath2);
-
-        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "plain"));
+        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2, "plain"));
 
         filePath1 = "src/test/resources/file1.yml";
         filePath2 = "src/test/resources/file2.yml";
 
-        parsedFile1 = Parser.parse(filePath1);
-        parsedFile2 = Parser.parse(filePath2);
-
-        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "plain"));
-
-        Assertions.assertEquals("", Differ.generate(Map.of(), Map.of(), "plain"));
+        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2, "plain"));
     }
 
     @Test
@@ -121,19 +85,11 @@ class DifferTest {
         String filePath1 = "src/test/resources/file1.json";
         String filePath2 = "src/test/resources/file2.json";
 
-        Map<String, Object> parsedFile1 = Parser.parse(filePath1);
-        Map<String, Object> parsedFile2 = Parser.parse(filePath2);
-
-        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "json"));
+        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2, "json"));
 
         filePath1 = "src/test/resources/file1.yml";
         filePath2 = "src/test/resources/file2.yml";
 
-        parsedFile1 = Parser.parse(filePath1);
-        parsedFile2 = Parser.parse(filePath2);
-
-        Assertions.assertEquals(expected, Differ.generate(parsedFile1, parsedFile2, "json"));
-
-        Assertions.assertEquals("", Differ.generate(Map.of(), Map.of(), "json"));
+        Assertions.assertEquals(expected, Differ.generate(filePath1, filePath2, "json"));
     }
 }
