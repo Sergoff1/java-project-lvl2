@@ -16,7 +16,7 @@ public class Plain {
             for (int i = 0; i < diffValues.length; i++) {
                 if (diffValues[i] instanceof String) {
                     diffValues[i] = "'" + diffValues[i] + "'";
-                } else if (isComplex(diffValues[0])) {
+                } else if (isComplex(diffValues[i])) {
                     diffValues[i] = "[complex value]";
                 }
             }
