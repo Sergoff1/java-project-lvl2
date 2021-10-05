@@ -24,7 +24,6 @@ public class App implements Runnable {
     @Override
     public final void run() {
         try {
-
             Map<String, Object> parsedFile1 = Parser.parse(filePath1);
             Map<String, Object> parsedFile2 = Parser.parse(filePath2);
 

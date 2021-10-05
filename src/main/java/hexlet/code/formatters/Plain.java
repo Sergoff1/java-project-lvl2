@@ -13,16 +13,12 @@ public class Plain {
                 continue;
             }
 
-            if (diffValues[0] instanceof String) {
-                diffValues[0] = "'" + diffValues[0] + "'";
-            } else if (isComplex(diffValues[0])) {
-                diffValues[0] = "[complex value]";
-            }
-
-            if (diffValues[1] instanceof String) {
-                diffValues[1] = "'" + diffValues[1] + "'";
-            } else if (isComplex(diffValues[1])) {
-                diffValues[1] = "[complex value]";
+            for (int i = 0; i < diffValues.length; i++) {
+                if (diffValues[i] instanceof String) {
+                    diffValues[i] = "'" + diffValues[i] + "'";
+                } else if (isComplex(diffValues[0])) {
+                    diffValues[i] = "[complex value]";
+                }
             }
 
             formattedDiff += "Property '" + key + "' was ";
