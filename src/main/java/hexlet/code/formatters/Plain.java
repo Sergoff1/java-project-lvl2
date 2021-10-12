@@ -5,29 +5,22 @@ import java.util.Map;
 
 public class Plain {
 
-    public static String format(Map<String, Object[]> diff) {
+    public static String format(Map<String, Map<String, Object[]>> diff) {
         String formattedDiff = "";
         for (String key : diff.keySet()) {
-            Object[] diffValues = diff.get(key);
-            if ("_!same".equals(diffValues[0])) {
+            Map<String, Object[]> diffValue = diff.get(key);
+            if (diffValue.containsKey("same")) {
                 continue;
             }
 
-            for (int i = 0; i < diffValues.length; i++) {
-                if (diffValues[i] instanceof String) {
-                    diffValues[i] = "'" + diffValues[i] + "'";
-                } else if (isComplex(diffValues[i])) {
-                    diffValues[i] = "[complex value]";
-                }
-            }
-
             formattedDiff += "Property '" + key + "' was ";
-            if ("'_!add'".equals(diffValues[0])) {
-                formattedDiff += "added with value: " + diffValues[1] + "\n";
-            } else if ("'_!delete'".equals(diffValues[0])) {
+            if (diffValue.containsKey("add")) {
+                formattedDiff += "added with value: " + filterValue(diffValue.get("add")[0]) + "\n";
+            } else if (diffValue.containsKey("delete")) {
                 formattedDiff += "removed\n";
             } else {
-                formattedDiff += "updated. From " + diffValues[0] + " to " + diffValues[1] + "\n";
+                formattedDiff += "updated. From " + filterValue(diffValue.get("changed")[0])
+                        + " to " + filterValue(diffValue.get("changed")[1]) + "\n";
             }
         }
 
@@ -39,5 +32,14 @@ public class Plain {
                 && (obj.getClass().isArray()
                 || Map.class.isAssignableFrom(obj.getClass())
                 || ArrayList.class.isAssignableFrom(obj.getClass()));
+    }
+
+    private static Object filterValue(Object value) {
+        if (value instanceof String) {
+            return "'" + value + "'";
+        } else if (isComplex(value)) {
+            return "[complex value]";
+        }
+        return value;
     }
 }

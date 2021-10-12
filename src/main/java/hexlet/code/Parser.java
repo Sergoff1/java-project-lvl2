@@ -4,23 +4,20 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> parse(String filePath) throws Exception {
-        String file = Files.readString(Paths.get(filePath));
+    public static Map<String, Object> parse(String data, String dataFormat) throws Exception {
+        ObjectMapper objectMapper = getObjectMapperFor(dataFormat);
+        return objectMapper.readValue(data, new TypeReference<HashMap<String, Object>>() { });
+    }
 
-        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
-
-        String fileExtension = filePath.substring(filePath.indexOf(".") + 1).toLowerCase();
-        if (fileExtension.equals("json")) {
-            objectMapper = new ObjectMapper();
-        }
-
-        return objectMapper.readValue(file, new TypeReference<HashMap<String, Object>>() { });
+    private static ObjectMapper getObjectMapperFor(String format) {
+        return switch (format.toLowerCase()) {
+            case "json" -> new ObjectMapper();
+            default -> new ObjectMapper(new YAMLFactory());
+        };
     }
 }

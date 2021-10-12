@@ -75,12 +75,15 @@ class DifferTest {
 
     @Test
     void testGenerateJson() throws Exception {
-        String expected = "{\"chars1\":[\"_!same\",[\"a\",\"b\",\"c\"]],\"chars2\":[[\"d\",\"e\",\"f\"],false],"
-            + "\"checked\":[false,true],\"default\":[null,[\"value1\",\"value2\"]],\"id\":[45,null],\"key1\":"
-            + "[\"_!delete\",\"value1\"],\"key2\":[\"_!add\",\"value2\"],\"numbers1\":[\"_!same\",[1,2,3,4]],"
-            + "\"numbers2\":[[2,3,4,5],[22,33,44,55]],\"numbers3\":[\"_!delete\",[3,4,5]],\"numbers4\":"
-            + "[\"_!add\",[4,5,6]],\"obj1\":[\"_!add\",{\"nestedKey\":\"value\",\"isNested\":true}],\"setting1\":"
-            + "[\"Some value\",\"Another value\"],\"setting2\":[200,300],\"setting3\":[true,\"none\"]}";
+        String expected = "{\"chars1\":{\"same\":[[\"a\",\"b\",\"c\"]]},"
+            + "\"chars2\":{\"changed\":[[\"d\",\"e\",\"f\"],false]},"
+            + "\"checked\":{\"changed\":[false,true]},\"default\":{\"changed\":[null,[\"value1\",\"value2\"]]},"
+            + "\"id\":{\"changed\":[45,null]},\"key1\":{\"delete\":[\"value1\"]},\"key2\":{\"add\":[\"value2\"]},"
+            + "\"numbers1\":{\"same\":[[1,2,3,4]]},\"numbers2\":{\"changed\":[[2,3,4,5],[22,33,44,55]]},"
+            + "\"numbers3\":{\"delete\":[[3,4,5]]},\"numbers4\":{\"add\":[[4,5,6]]},"
+            + "\"obj1\":{\"add\":[{\"nestedKey\":\"value\",\"isNested\":true}]},"
+            + "\"setting1\":{\"changed\":[\"Some value\",\"Another value\"]},\"setting2\":{\"changed\":[200,300]},"
+            + "\"setting3\":{\"changed\":[true,\"none\"]}}";
 
         String filePath1 = "src/test/resources/file1.json";
         String filePath2 = "src/test/resources/file2.json";

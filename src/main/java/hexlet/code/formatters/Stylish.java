@@ -4,19 +4,19 @@ import java.util.Map;
 
 public class Stylish {
 
-    public static String format(Map<String, Object[]> diff) {
+    public static String format(Map<String, Map<String, Object[]>> diff) {
         String formattedDiff = "{\n";
         for (String key : diff.keySet()) {
-            Object[] diffValues = diff.get(key);
-            if ("_!add".equals(diffValues[0])) {
-                formattedDiff += "  + " + key + ": " + diffValues[1] + "\n";
-            } else if ("_!delete".equals(diffValues[0])) {
-                formattedDiff += "  - " + key + ": " + diffValues[1] + "\n";
-            } else if ("_!same".equals(diffValues[0])) {
-                formattedDiff += "    " + key + ": " + diffValues[1] + "\n";
+            Map<String, Object[]> diffValue = diff.get(key);
+            if (diffValue.containsKey("add")) {
+                formattedDiff += "  + " + key + ": " + diffValue.get("add")[0] + "\n";
+            } else if (diffValue.containsKey("delete")) {
+                formattedDiff += "  - " + key + ": " + diffValue.get("delete")[0] + "\n";
+            } else if (diffValue.containsKey("same")) {
+                formattedDiff += "    " + key + ": " + diffValue.get("same")[0] + "\n";
             } else {
-                formattedDiff += "  - " + key + ": " + diffValues[0] + "\n";
-                formattedDiff += "  + " + key + ": " + diffValues[1] + "\n";
+                formattedDiff += "  - " + key + ": " + diffValue.get("changed")[0] + "\n";
+                formattedDiff += "  + " + key + ": " + diffValue.get("changed")[1] + "\n";
             }
         }
         return formattedDiff + "}";
