@@ -10,12 +10,13 @@ import java.util.Map;
 public class Formatter {
 
     public static String chooseFormat(String format, Map<String, Map<String, Object[]>> diff)
-            throws JsonProcessingException {
+            throws Exception {
 
         return switch (format) {
             case "plain" -> Plain.format(diff);
             case "json" -> Json.format(diff);
-            default -> Stylish.format(diff);
+            case "stylish" -> Stylish.format(diff);
+            default -> throw new Exception("Unknown output format");
         };
     }
 }

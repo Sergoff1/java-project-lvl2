@@ -14,10 +14,11 @@ public class Parser {
         return objectMapper.readValue(data, new TypeReference<HashMap<String, Object>>() { });
     }
 
-    private static ObjectMapper getObjectMapperFor(String format) {
+    private static ObjectMapper getObjectMapperFor(String format) throws Exception {
         return switch (format.toLowerCase()) {
             case "json" -> new ObjectMapper();
-            default -> new ObjectMapper(new YAMLFactory());
+            case "yml", "yaml" -> new ObjectMapper(new YAMLFactory());
+            default -> throw new Exception("Unknown file format");
         };
     }
 }
